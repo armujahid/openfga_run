@@ -22,14 +22,16 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
-    image: openfga/openfga:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: openfga-local:latest
     container_name: openfga
     user: nonroot
     environment:
       - OPENFGA_DATASTORE_ENGINE=sqlite
       - OPENFGA_DATASTORE_URI=file:/home/nonroot/openfga.db
       - OPENFGA_LOG_FORMAT=json
-    command: run
     networks:
       - openfga
     volumes:
