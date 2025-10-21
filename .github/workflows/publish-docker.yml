@@ -48,7 +48,7 @@ jobs:
             OPENFGA_VERSION=${{ steps.version.outputs.version_with_v }}
           tags: |
             ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version_with_v }}
-            ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version_number }}
+            ${{ env.IMAGE_NAME }}:${{ steps.version.outputs.version }}
             ${{ env.IMAGE_NAME }}:latest
           platforms: linux/amd64,linux/arm64
 
