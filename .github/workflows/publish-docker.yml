@@ -33,11 +33,24 @@ jobs:
       - name: Extract version number
         id: version
         run: |
-          VERSION="${{ github.event.inputs.openfga_version }}"
-          # Remove 'v' prefix if present
-          VERSION_NUMBER="${VERSION#v}"
-          echo "version=${VERSION_NUMBER}" >> $GITHUB_OUTPUT
-          echo "version_with_v=${VERSION}" >> $GITHUB_OUTPUT
+          INPUT_VERSION="${{ github.event.inputs.openfga_version }}"
+          echo "Input version: $INPUT_VERSION"
+
+          # Ensure version has 'v' prefix
+          if [[ "$INPUT_VERSION" != v* ]]; then
+            VERSION_WITH_V="v${INPUT_VERSION}"
+          else
+            VERSION_WITH_V="$INPUT_VERSION"
+          fi
+
+          # Remove 'v' prefix for clean version
+          VERSION_NUMBER="${VERSION_WITH_V#v}"
+
+          echo "Version with v: $VERSION_WITH_V"
+          echo "Version without v: $VERSION_NUMBER"
+
+          echo "version=$VERSION_NUMBER" >> $GITHUB_OUTPUT
+          echo "version_with_v=$VERSION_WITH_V" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
