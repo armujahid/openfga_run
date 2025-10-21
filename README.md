@@ -33,6 +33,7 @@ Add the following secrets to your GitHub repository:
 2. Add these secrets:
    - `DOCKERHUB_USERNAME`: Your Docker Hub username
    - `DOCKERHUB_TOKEN`: Your Docker Hub access token ([create one here](https://hub.docker.com/settings/security))
+     - **Required permissions**: Read, Write, and Delete (all three are needed for updating repository descriptions)
 
 ### 2. Publishing a New Version
 
